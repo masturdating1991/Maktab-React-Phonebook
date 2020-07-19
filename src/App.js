@@ -1,13 +1,15 @@
-import React, { useState,useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
     const [list, setList] = useState([])
+    const [filteredList, setFilteredList] = useState([])
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
+    const [search, setSearch] = useState('')
 
     const inputElement = useRef(null);
-  
+
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -22,16 +24,25 @@ function App() {
         setName('')
         setPhone('')
         setEmail('')
- 
-            inputElement.current.focus();
-          
-     
+
+        inputElement.current.focus();
     }
 
     const handleDelete = id => {
-        const filteredDelete = [...list.filter(item => item.id !== id)];
+        const filteredDelete = list.filter(item => item.id !== id)
         setList(filteredDelete)
     }
+
+
+
+    useEffect(() => {
+        const filteredSearch = list.filter(item => item.name.toLowerCase().startsWith(search.toLowerCase()))
+        setFilteredList(filteredSearch)
+    }, [search, list])
+
+
+
+
     return (
         <>
             <div className="container bg-secondary my-5 text-white">
@@ -79,10 +90,10 @@ function App() {
                     </div>
 
                     <div className="col-md-6  px-0">
-                        <input 
-                        type="submit" 
-                        value="Submit" 
-                        className="btn btn-block btn-info" />
+                        <input
+                            type="submit"
+                            value="Submit"
+                            className="btn btn-block btn-info" />
                     </div>
                 </form>
 
@@ -91,16 +102,20 @@ function App() {
             <div className="container">
                 <div className="row mb-3">
                     <div className="col-9 mx-auto">
-                        <form id="form-search">
+                        <form id="form-search" >
                             <div className="row">
                                 <div className="col-10 px-0">
-                                    <input type="text"
+                                    <input
+                                        onChange={e => setSearch(e.target.value)}
+                                        value={search}
+                                        type="search"
                                         className="form-control"
                                         placeholder="Search"
-                                        id="form-search-input" />
+                                    />
                                 </div>
                                 <div className="col-1 p-0">
-                                    <button type="submit"
+                                    <button
+                                        type="submit"
                                         className="btn btn-primary p-2 d-flex justify-content-center align-items-center"
                                         style={{ height: "38px" }}>
                                         <i className="fas fa-search" />
@@ -127,7 +142,7 @@ function App() {
 
                         <tbody>
                             {
-                                list.map(item =>
+                                filteredList.map(item =>
                                     <tr key={item.id}>
                                         <td>{item.name}</td>
                                         <td>{item.phone}</td>
@@ -139,7 +154,9 @@ function App() {
                                                 style={{ padding: "10px", fontSize: "15px", marginRight: "5px" }}>
                                                 <i className='fa fa-trash ' />
                                             </button>
-                                            <button className="btn btn-primary"
+
+                                            <button
+                                                className="btn btn-primary"
                                                 style={{ padding: "10px", fontSize: "15px" }}><i className='fa fa-edit' />
                                             </button>
                                         </td>
