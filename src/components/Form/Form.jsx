@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 
-function Form({ list, setList }) {
+function Form({ setList }) {
     const inputElement = useRef(null);
 
     const [name, setName] = useState('')
@@ -10,12 +10,14 @@ function Form({ list, setList }) {
     const handleSubmit = e => {
         e.preventDefault()
         name.trim().length > 0 && phone.trim().length > 0 && email.trim().length > 0 &&
-            setList([...list, {
-                id: Date.now(),
-                name,
-                phone,
-                email
-            }])
+            setList(prev => {
+                return prev.concat({
+                    id: Date.now(),
+                    name,
+                    phone,
+                    email
+                })
+            })
 
         setName('')
         setPhone('')

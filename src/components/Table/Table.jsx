@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Table({list,setList,filteredList}) {
+function Table({ list, setList, filteredList }) {
 
     const handleDelete = id => {
         const filteredDelete = list.filter(item => item.id !== id)
