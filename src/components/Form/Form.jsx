@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
-function Form({ setList }) {
+function Form({ list, setList }) {
     const inputElement = useRef(null);
 
     const [name, setName] = useState('')
@@ -25,6 +25,17 @@ function Form({ setList }) {
 
         inputElement.current.focus();
     }
+
+    useEffect(() => {
+        if (localStorage.getItem('phonebook')) {
+            setList(JSON.parse(localStorage.getItem('phonebook')))
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('phonebook', JSON.stringify(list))
+    }, [list])
+
     return (
         <div className="container bg-secondary my-5 text-white">
             <form className="py-2" onSubmit={handleSubmit}>
