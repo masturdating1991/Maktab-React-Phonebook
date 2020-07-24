@@ -10,20 +10,14 @@ function Phonebook() {
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
-
+    const [temp, settemp] = useState({ value: "Submit", id: 0 })
 
     const edit = (id, name, phone, email) => {
         setName(name);
         setPhone(phone);
         setEmail(email);
-        setList((list.map((item) => {
-            if (item.id == id) {
-                item.name = name
-                item.phone = phone
-                item.email = email
-                return item;
-            } else return item;
-        })))
+        settemp({ value: "Edit", id: id })
+
     }
     return (
         <>
@@ -36,6 +30,8 @@ function Phonebook() {
                 setPhone={setPhone}
                 email={email}
                 setEmail={setEmail}
+                temp={temp}
+                settemp={settemp}
             />
 
 

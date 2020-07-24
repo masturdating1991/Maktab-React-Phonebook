@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-function Form({list, setList, name, setName, phone, setPhone, email, setEmail }) {
+function Form({list, setList, name, setName, phone, setPhone, email, setEmail ,temp,settemp}) {
     const inputElement = useRef(null);
-
-
 
 
     const handleSubmit = e => {
         e.preventDefault()
+        if(temp.value=="Submit")
+        {
         name.trim().length > 0 && phone.trim().length > 0 && email.trim().length > 0 &&
             setList(prev => {
                 return prev.concat({
@@ -18,12 +18,22 @@ function Form({list, setList, name, setName, phone, setPhone, email, setEmail })
                 })
             })
 
-        
-
         setName('')
         setPhone('')
         setEmail('')
-
+        }
+        else if(temp.value=="Edit")
+        {
+            setList((list.map((item) => {
+                if (item.id == temp.id) {
+                    item.name = name
+                    item.phone = phone
+                    item.email = email
+                    return item;
+                } else return item;
+            })))
+            settemp({value:"Submit",id:0})
+        }
         inputElement.current.focus();
     }
 
@@ -90,7 +100,7 @@ function Form({list, setList, name, setName, phone, setPhone, email, setEmail })
                 <div className="col-md-12  px-0">
                     <input
                         type="submit"
-                        value="Submit"
+                        value={temp.value}
                         className="btn btn-block btn-info" />
                 </div>
 
