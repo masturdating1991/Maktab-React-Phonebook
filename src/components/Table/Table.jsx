@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Table({ list, setList, filteredList }) {
+function Table({ list, setList, filteredList, edit }) {
 
     const handleDelete = id => {
         const filteredDelete = list.filter(item => item.id !== id)
@@ -9,7 +9,7 @@ function Table({ list, setList, filteredList }) {
 
     return (
         <div className="container px-0 ">
-            <div id="table" className="table-responsive">
+            <div className="table-responsive">
                 <table id='contact-table' className="table table-striped table-hover">
                     <thead className="thead-dark ">
                         <tr>
@@ -36,6 +36,7 @@ function Table({ list, setList, filteredList }) {
                                         </button>
 
                                         <button
+                                            onClick={() => edit(item.id,item.name, item.phone, item.email)}
                                             className="btn btn-primary"
                                             style={{ padding: "10px", fontSize: "15px" }}><i className='fa fa-edit' />
                                         </button>

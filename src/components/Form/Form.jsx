@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-function Form({ list, setList }) {
+function Form({list, setList, name, setName, phone, setPhone, email, setEmail }) {
     const inputElement = useRef(null);
 
-    const [name, setName] = useState('')
-    const [phone, setPhone] = useState('')
-    const [email, setEmail] = useState('')
+
+
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -19,6 +18,8 @@ function Form({ list, setList }) {
                 })
             })
 
+        
+
         setName('')
         setPhone('')
         setEmail('')
@@ -26,15 +27,20 @@ function Form({ list, setList }) {
         inputElement.current.focus();
     }
 
+
+
     useEffect(() => {
         if (localStorage.getItem('phonebook')) {
             setList(JSON.parse(localStorage.getItem('phonebook')))
         }
     }, [])
 
+
     useEffect(() => {
         localStorage.setItem('phonebook', JSON.stringify(list))
     }, [list])
+
+
 
     return (
         <div className="container bg-secondary my-5 text-white">
@@ -81,12 +87,14 @@ function Form({ list, setList }) {
 
                 </div>
 
-                <div className="col-md-6  px-0">
+                <div className="col-md-12  px-0">
                     <input
                         type="submit"
                         value="Submit"
                         className="btn btn-block btn-info" />
                 </div>
+
+                
             </form>
 
         </div>
