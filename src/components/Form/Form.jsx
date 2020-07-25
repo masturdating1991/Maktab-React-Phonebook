@@ -1,29 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-function Form({list, setList, name, setName, phone, setPhone, email, setEmail ,temp,settemp}) {
+function Form({ list, setList, name, setName, phone, setPhone, email, setEmail, temp, setTemp }) {
     const inputElement = useRef(null);
 
 
     const handleSubmit = e => {
         e.preventDefault()
-        if(temp.value=="Submit")
-        {
-        name.trim().length > 0 && phone.trim().length > 0 && email.trim().length > 0 &&
-            setList(prev => {
-                return prev.concat({
-                    id: Date.now(),
-                    name,
-                    phone,
-                    email
+        if (temp.value == "Submit") {
+            name.trim().length > 0 && phone.trim().length > 0 && email.trim().length > 0 &&
+                setList(prev => {
+                    return prev.concat({
+                        id: Date.now(),
+                        name,
+                        phone,
+                        email
+                    })
                 })
-            })
 
-        setName('')
-        setPhone('')
-        setEmail('')
+            setName('')
+            setPhone('')
+            setEmail('')
         }
-        else if(temp.value=="Edit")
-        {
+        else if (temp.value == "Edit") {
             setList((list.map((item) => {
                 if (item.id == temp.id) {
                     item.name = name
@@ -32,7 +30,7 @@ function Form({list, setList, name, setName, phone, setPhone, email, setEmail ,t
                     return item;
                 } else return item;
             })))
-            settemp({value:"Submit",id:0})
+            setTemp({ value: "Submit", id: 0 })
         }
         inputElement.current.focus();
     }
@@ -104,7 +102,7 @@ function Form({list, setList, name, setName, phone, setPhone, email, setEmail ,t
                         className="btn btn-block btn-info" />
                 </div>
 
-                
+
             </form>
 
         </div>

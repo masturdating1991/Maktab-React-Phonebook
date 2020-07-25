@@ -10,7 +10,7 @@ function Search({ list, setFilteredList }) {
     }, [search, list])
 
     return (
-        <div className="container">
+        <div className="container mt-5">
             <div className="row mb-3">
                 <div className="col-9 mx-auto">
                     <form id="form-search">

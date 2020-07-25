@@ -1,0 +1,13 @@
+.active-form:hover,
+.active-table:hover{
+    background-color: #487ab4;
+    color: #ffffff;
+
+}
+
+
+.active-form,
+.active-table {
+    background-color: #007bff;
+    color: #ffffff;
+}
