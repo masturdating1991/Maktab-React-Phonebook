@@ -1,11 +1,15 @@
-import React from 'react'
-
+import React,{useEffect} from 'react'
+import { Link } from 'react-router-dom'
 function Table({ list, setList, filteredList, edit }) {
 
     const handleDelete = id => {
         const filteredDelete = list.filter(item => item.id !== id)
         setList(filteredDelete)
     }
+
+    useEffect(() => {
+        localStorage.setItem('phonebook', JSON.stringify(list))
+    }, [list])
 
     return (
         <div className="container px-0 ">
@@ -24,7 +28,10 @@ function Table({ list, setList, filteredList, edit }) {
                         {
                             filteredList.map(item =>
                                 <tr key={item.id}>
-                                    <td>{item.name}</td>
+                                    <td>
+                                        <Link to={`/table/${item.id}`} >{item.name} </Link>
+                                    </td>
+
                                     <td>{item.phone}</td>
                                     <td>{item.email}</td>
                                     <td>
@@ -36,20 +43,21 @@ function Table({ list, setList, filteredList, edit }) {
                                         </button>
 
                                         <button
-                                            onClick={() => edit(item.id,item.name, item.phone, item.email)}
+                                            onClick={() => edit(item.id, item.name, item.phone, item.email)}
                                             className="btn btn-primary"
                                             style={{ padding: "10px", fontSize: "15px" }}><i className='fa fa-edit' />
                                         </button>
                                     </td>
 
                                 </tr>
+
                             )
 
                         }
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     )
 }
 

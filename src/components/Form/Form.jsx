@@ -30,6 +30,9 @@ function Form({ list, setList, name, setName, phone, setPhone, email, setEmail, 
                     return item;
                 } else return item;
             })))
+            setName('')
+            setPhone('')
+            setEmail('')
             setTemp({ value: "Submit", id: 0 })
         }
         inputElement.current.focus();

@@ -4,7 +4,8 @@ import Search from '../Search/Search.jsx';
 import Table from '../Table/Table.jsx';
 import Router from '../Router/Router'
 
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import ContactSingle from '../ContactSingle/ContactSingle';
 
 function Phonebook() {
     const [list, setList] = useState([])
@@ -20,7 +21,6 @@ function Phonebook() {
         setPhone(phone);
         setEmail(email);
         setTemp({ value: "Edit", id: id })
-
     }
     return (
         <>
@@ -42,7 +42,7 @@ function Phonebook() {
                 </Route>
 
 
-                <Route path='/table'>
+                <Route exact path='/table'>
                     <Search
                         list={list}
                         setFilteredList={setFilteredList}
@@ -53,6 +53,12 @@ function Phonebook() {
                         setList={setList}
                         filteredList={filteredList}
                         edit={edit}
+                    />
+                </Route>
+
+                <Route path='/table/:id'>
+                    <ContactSingle 
+                        list={list}
                     />
                 </Route>
             </Switch>
