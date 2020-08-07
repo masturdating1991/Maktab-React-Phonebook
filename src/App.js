@@ -1,14 +1,18 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+import store from './redux/store'
 import Phonebook from './components/Phonebook/Phonebook.jsx'
 
-import { BrowserRouter } from 'react-router-dom'
 
 function App() {
 
     return (
-        <BrowserRouter>
-            <Phonebook />
-        </BrowserRouter>
+        <Provider store={store}>
+            <BrowserRouter>
+                <Phonebook />
+            </BrowserRouter>
+        </Provider>
     );
 }
 

@@ -1,15 +1,15 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-function Table({ list, setList, filteredList, edit }) {
+import { connect } from 'react-redux'
+
+function Table({ list, setList, search, edit, contact }) {
 
     const handleDelete = id => {
         const filteredDelete = list.filter(item => item.id !== id)
         setList(filteredDelete)
     }
 
-    useEffect(() => {
-        localStorage.setItem('phonebook', JSON.stringify(list))
-    }, [list])
+    const filteredList = contact.filter(item => item.name.toLowerCase().startsWith(search.toLowerCase()))
 
     return (
         <div className="container px-0 ">
@@ -61,4 +61,10 @@ function Table({ list, setList, filteredList, edit }) {
     )
 }
 
-export default Table
+const mapStateToProps = state => {
+    return {
+        contact: state.contacts.contacts_list,
+        search: state.contacts.search
+    }
+}
+export default connect(mapStateToProps, null)(Table)

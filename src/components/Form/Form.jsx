@@ -1,21 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { addContact } from '../../redux/contact/contact.actions'
+import { connect } from 'react-redux'
 
-function Form({ list, setList, name, setName, phone, setPhone, email, setEmail, temp, setTemp }) {
+function Form({ list, setList, name, setName, phone, setPhone, email, setEmail, temp, setTemp, addContact }) {
     const inputElement = useRef(null);
 
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         if (temp.value == "Submit") {
             name.trim().length > 0 && phone.trim().length > 0 && email.trim().length > 0 &&
-                setList(prev => {
-                    return prev.concat({
-                        id: Date.now(),
-                        name,
-                        phone,
-                        email
-                    })
+                addContact({
+                    id: Date.now(),
+                    name,
+                    phone,
+                    email
                 })
+
 
             setName('')
             setPhone('')
@@ -112,4 +113,5 @@ function Form({ list, setList, name, setName, phone, setPhone, email, setEmail, 
     )
 }
 
-export default Form
+
+export default connect(null, {addContact})(Form)

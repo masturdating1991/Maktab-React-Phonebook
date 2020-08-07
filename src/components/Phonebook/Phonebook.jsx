@@ -57,7 +57,7 @@ function Phonebook() {
                 </Route>
 
                 <Route path='/table/:id'>
-                    <ContactSingle 
+                    <ContactSingle
                         list={list}
                     />
                 </Route>

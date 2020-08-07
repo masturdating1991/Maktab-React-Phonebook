@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useParams } from 'react-router-dom'
 
 function ContactSingle({ list }) {
-    console.log(list);
     const { id } = useParams()
 
     return (
@@ -18,8 +17,6 @@ function ContactSingle({ list }) {
                         </div>
 
                     )
-
-
                     }
                 </div>
 

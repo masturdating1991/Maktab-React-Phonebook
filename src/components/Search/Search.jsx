@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { setSearch } from '../../redux/contact/contact.actions'
 
-function Search({ list, setFilteredList }) {
 
-    const [search, setSearch] = useState('')
+function Search({ search, setSearch }) {
 
-    useEffect(() => {
-        const filteredSearch = list.filter(item => item.name.toLowerCase().startsWith(search.toLowerCase()))
-        setFilteredList(filteredSearch)
-    }, [search, list])
+    // useEffect(() => {
+    //     const filteredSearch = list.filter(item => item.name.toLowerCase().startsWith(search.toLowerCase()))
+    //     setFilteredList(filteredSearch)
+    // }, [search, list])
 
     return (
         <div className="container mt-5">
@@ -40,4 +41,10 @@ function Search({ list, setFilteredList }) {
     )
 }
 
-export default Search
+
+const mapStateToProps = state => {
+    return {
+        search: state.contacts.search,
+    }
+}
+export default connect(mapStateToProps, { setSearch })(Search)
